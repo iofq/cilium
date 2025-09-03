@@ -824,6 +824,9 @@ func (ct *ConnectivityTest) getDefaultGateway(ctx context.Context, podNamespace,
 }
 
 func (ct *ConnectivityTest) modifyStaticRoutesForNodesWithoutCilium(ctx context.Context, verb string) error {
+	if f, ok := ct.Feature(features.Flavor); ok && f.Enabled && f.Mode == "aks" {
+		return nil
+	}
 	for _, e := range ct.params.PodCIDRs {
 		for withoutCilium := range ct.nodesWithoutCilium {
 			pod := ct.hostNetNSPodsByNode[withoutCilium]
