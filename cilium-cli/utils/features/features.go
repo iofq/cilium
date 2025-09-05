@@ -102,8 +102,6 @@ const (
 
 	EnableEnvoyConfig Feature = "enable-envoy-config"
 
-	WireguardEncapsulate Feature = "wireguard-encapsulate"
-
 	CiliumIPAMMode Feature = "ipam"
 
 	IPsecEnabled                  Feature = "enable-ipsec"
@@ -356,10 +354,6 @@ func (fs Set) ExtractFromConfigMap(cm *v1.ConfigMap) {
 
 	fs[EnableEnvoyConfig] = Status{
 		Enabled: cm.Data[string(EnableEnvoyConfig)] == "true",
-	}
-
-	fs[WireguardEncapsulate] = Status{
-		Enabled: cm.Data[string(WireguardEncapsulate)] == "true",
 	}
 
 	fs[CiliumIPAMMode] = Status{
